@@ -1,5 +1,7 @@
 package com.epam.izh.rd.online.service;
 
+import java.util.Arrays;
+
 public class SimpleMathService implements MathService {
 
     /**
@@ -28,8 +30,7 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public int maxFrom(int value1, int value2) {
-        int maximum = (value1 >= value2) ? value1 : value2;
-        return maximum;
+        return (value1 >= value2) ? value1 : value2; // Warning: Can be replaced with 'Math.max' call
     }
 
     /**
@@ -73,10 +74,19 @@ public class SimpleMathService implements MathService {
             }
         }
         int[] resultArray = new int[resultCount];
-        for (int n = 0; n < resultCount; n++) { // Warning: Manual array copy
+        /* for (int n = 0; n < resultCount; n++) { // Warning: Manual array copy
             resultArray[n] = tempArray[n];
-        }
+        } */
+
+        // for avoid warning: Manual array copy
+        System.arraycopy(tempArray, 0, resultArray, 0, resultCount);
         return resultArray;
+
+        // for avoid warning: Manual array copy
+        // return Arrays.copyOf(tempArray, resultCount);
+
+        // for avoid warning: Manual array copy
+        // return Arrays.copyOfRange(tempArray, 0, resultCount);
     }
 
     /**
